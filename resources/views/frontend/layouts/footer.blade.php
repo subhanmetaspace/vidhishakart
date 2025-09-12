@@ -66,6 +66,9 @@
 								<li><a href="{{ route('about-us') }}">About Us</a></li>
 								<li><a href="{{ route('unclaimable-products') }}">Unclaimable Products</a></li>
 								<li><a href="{{ route('why-us') }}">Why Us?</a></li>
+								<li><a href="{{ route('privacy-policy') }}">Privacy policy</a></li>
+								<li><a href="{{ route('return-and-exchange') }}">Return & Exchange Policy</a></li>
+								<li><a href="{{ route('terms-and-conditions') }}">Terms and conditions</a></li>
 							</ul>
 						</div>
 						<!-- End Single Widget -->
@@ -183,7 +186,7 @@
 	</footer>
 	<!-- /End Footer Area +971554903574-->
 <!-- Add this code where you want to display the WhatsApp icon -->
-<a target="_blank" href="https://api.whatsapp.com/send?phone=919833960576&amp;text=" style="bottom: 20px; right: 15px; position: fixed; z-index: 99999999;"><img src="https://reliancezone.ae/uploads/lib/wtsapp.png" alt="WhatsApp chat" style="height: 65px;"></a>
+<a target="_blank" href="https://api.whatsapp.com/send?phone=971554903574&amp;text=" style="bottom: 20px; right: 15px; position: fixed; z-index: 99999999;"><img src="https://reliancezone.ae/uploads/lib/wtsapp.png" alt="WhatsApp chat" style="height: 65px;"></a>
 
 	<!-- Jquery -->
     <script src="{{asset('frontend/js/jquery.min.js')}}"></script>

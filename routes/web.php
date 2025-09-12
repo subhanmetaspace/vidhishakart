@@ -35,6 +35,9 @@ Route::get('/home', 'FrontendController@index');
 Route::get('/about-us','FrontendController@aboutUs')->name('about-us');
 Route::get('/unclaimable-products','FrontendController@unclaimableProducts')->name('unclaimable-products');
 Route::get('/why-us','FrontendController@whyUs')->name('why-us');
+Route::get('/return-and-exchange','FrontendController@returnAndExchangePolicy')->name('return-and-exchange');
+Route::get('/privacy-policy','FrontendController@privacyPolicy')->name('privacy-policy');
+Route::get('/terms-and-conditions','FrontendController@termsAndConditions')->name('terms-and-conditions');
 Route::get('/thanku','OrderController@thankYou')->name('thankYou');
 Route::post('/add-missingOrder', 'CustomController@addMissingOrder')->name('order.addMissingOrder');
 
