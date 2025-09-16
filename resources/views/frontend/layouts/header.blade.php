@@ -16,16 +16,23 @@
         justify-content: space-between !important;
         }
     }
+    .middle_innertop{
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        }
     .cart-icon {
     position: relative;
 }
 .search-bar-top{
-    width:800px;
+   flex: 1;
+    max-width: 800px;
+    min-width: 250px;
 }
 .cart-icon .badge {
     position: absolute;
-    top: 14px;
-    right: -13px;
+     top: -5px;   /* moves it up */
+    right: -8px;
     background: red;
     color: white;
     font-size: 12px;

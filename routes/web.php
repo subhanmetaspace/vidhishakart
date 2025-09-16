@@ -14,7 +14,7 @@ use App\Http\Controllers\OrderController;
 */
 
 Auth::routes(['register'=>false]);
-
+Route::get('/order/view/{order_number}', [OrderController::class, 'viewOrder'])->name('order.view');
 Route::get('user/login','FrontendController@login')->name('login.form');
 Route::post('user/login','FrontendController@loginSubmit')->name('login.submit');
 Route::get('user/logout','FrontendController@logout')->name('user.logout');

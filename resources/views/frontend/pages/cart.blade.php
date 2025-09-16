@@ -32,7 +32,7 @@
 								<th class="text-center">UNIT PRICE</th>
 								<th class="text-center">QUANTITY</th>
 								<th class="text-center">TOTAL</th>
-								<!-- <th class="text-center"><i class="ti-trash remove-icon"></i></th> -->
+								<th class="text-center"><i class="ti-trash remove-icon"></i></th>
 							</tr>
 						</thead>
 						<tbody id="cart_item_list">
@@ -69,7 +69,7 @@
 											</td>
 											<td class="total-amount cart_single_price" data-title="Total"><span class="money">${{$cart['price']}}</span></td>
 
-											<!-- <td class="action" data-title="Remove"><a href="{{route('cart-delete',$cart->id)}}"><i class="ti-trash remove-icon"></i></a></td> -->
+											<td class="action" data-title="Remove"><a href="{{route('cart-delete',$cart->id)}}"><i class="ti-trash remove-icon"></i></a></td>
 										</tr>
 									@endforeach
 									<track>
@@ -85,7 +85,7 @@
 								@else
 										<tr>
 											<td class="text-center">
-												There are no any carts available. <a href="{{route('product-grids')}}" style="color:blue;">Continue shopping</a>
+												There are no any carts available. <a href="{{route('home')}}" style="color:blue;">Continue shopping</a>
 
 											</td>
 										</tr>
@@ -193,27 +193,27 @@
 @endsection
 @push('styles')
 	<style>
-		li.shipping{
+		.shopping-cart li.shipping{
 			display: inline-flex;
 			width: 100%;
 			font-size: 14px;
 		}
-		li.shipping .input-group-icon {
+		.shopping-cart li.shipping .input-group-icon {
 			width: 100%;
 			margin-left: 10px;
 		}
-		.input-group-icon .icon {
+		.shopping-cart .input-group-icon .icon {
 			position: absolute;
 			left: 20px;
 			top: 0;
 			line-height: 40px;
 			z-index: 3;
 		}
-		.form-select {
+		.shopping-cart .form-select {
 			height: 30px;
 			width: 100%;
 		}
-		.form-select .nice-select {
+		.shopping-cart .form-select .nice-select {
 			border: none;
 			border-radius: 0px;
 			height: 40px;
@@ -222,14 +222,14 @@
 			padding-right: 40px;
 			width: 100%;
 		}
-		.list li{
+		.shopping-cart .list li{
 			margin-bottom:0 !important;
 		}
-		.list li:hover{
+		.shopping-cart .list li:hover{
 			background:#F7941D !important;
 			color:white !important;
 		}
-		.form-select .nice-select::after {
+		.shopping-cart .form-select .nice-select::after {
 			top: 14px;
 		}
 	</style>
@@ -268,23 +268,20 @@ document.addEventListener("DOMContentLoaded", function () {
             cartTableBody.innerHTML = `
                 <tr>
                     <td class="text-center" colspan="6">
-                        There are no any carts available. 
-                        <a href="/product-grids" style="color:blue;">Continue shopping</a>
+                        There are no carts available. 
+                        <a href="/" style="color:blue;">Continue shopping</a>
                     </td>
                 </tr>
             `;
-            subtotalElem.textContent = "$0.00";
-            youPayElem.textContent = "$0.00";
+            subtotalElem.textContent = "₹0.00";
+            youPayElem.textContent = "₹0.00";
             return;
         }
 
         let subtotal = 0;
 
         cart.forEach((item, index) => {
-            // Extract numeric quantity
-            let qtyMatch = item.quantity.match(/\d+/);
-            let qty = qtyMatch ? parseInt(qtyMatch[0]) : 1;
-
+            let qty = parseInt(item.quantity) || 1;
             let total = item.price * qty;
             subtotal += total;
 
@@ -296,29 +293,35 @@ document.addEventListener("DOMContentLoaded", function () {
                     <td class="price text-center">₹${item.price.toFixed(2)}</td>
                     <td class="qty text-center">${qty}</td>
                     <td class="total-amount text-center">₹${total.toFixed(2)}</td>
-                    
+                    <td class="action text-center">
+                        <button class="remove-btn" data-index="${index}">
+                            <i class="ti-trash remove-icon"></i>
+                        </button>
+                    </td>
                 </tr>
             `;
         });
 
-        // Update subtotal and total
+        // Update totals
         subtotalElem.textContent = "₹" + subtotal.toFixed(2);
-        youPayElem.textContent = "₹" + subtotal.toFixed(2); // You can subtract coupon/shipping if needed
-
-        // Attach delete handlers
-        document.querySelectorAll(".remove-btn").forEach(btn => {
-            btn.addEventListener("click", function() {
-                let idx = this.dataset.index;
-                cart.splice(idx, 1);
-                localStorage.setItem("checkout_cart", JSON.stringify(cart));
-                loadCart();
-            });
-        });
+        youPayElem.textContent = "₹" + subtotal.toFixed(2);
     }
+
+    // ✅ Use event delegation so handlers always work
+    cartTableBody.addEventListener("click", function (e) {
+        if (e.target.closest(".remove-btn")) {
+            let cart = JSON.parse(localStorage.getItem("checkout_cart")) || [];
+            let idx = e.target.closest(".remove-btn").dataset.index;
+            cart.splice(idx, 1);
+            localStorage.setItem("checkout_cart", JSON.stringify(cart));
+            loadCart();
+        }
+    });
 
     loadCart();
 });
 </script>
+
 
 
 @endpush

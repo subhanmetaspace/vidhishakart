@@ -3,10 +3,11 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class OrderNotification extends Mailable
+class CustomerOrderNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -24,6 +25,6 @@ class OrderNotification extends Mailable
     public function build()
     {
         return $this->subject('New Order Notification - Order #'.$this->order->order_number)
-                    ->view('emails.order_notification'); // Create this view
+                    ->view('emails.customer_notification'); // Create this view
     }
 }

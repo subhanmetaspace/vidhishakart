@@ -47,7 +47,7 @@ $data = (session('order') !== null)? session('order') : [];
                                         <p class="product-title">
                                         {{ $data['product_title'] }}</p> </td>
                                     <td class="qty text-center" data-title="Qty"> {{ $data['quantity'] }}</td>
-                                    <td class="price text-center" data-title="Price">{{ $data['total_price'] }} AED</td>
+                                    <td class="price text-center" data-title="Price">{{ $data['total_price'] }} INR</td>
                                 </tr>
                                 @php
                                // print_r($data);die;
@@ -70,7 +70,7 @@ $data = (session('order') !== null)? session('order') : [];
                                             <p class="product-title">
                                             {{ $torder->product_name }}</p> </td>
                                         <td class="qty text-center" data-title="Qty"> {{ (!empty($torder->quantity_selected))? $torder->quantity_selected : $torder->quantity  }}</td>
-                                        <td class="price text-center" data-title="Price">{{ $torder->sub_total }} AED</td>
+                                        <td class="price text-center" data-title="Price">{{ $torder->sub_total }} INR</td>
                                     </tr>
                                         @php
                                             $totalDeliveryCost = $totalDeliveryCost + $torder->delivery_charge;
@@ -110,9 +110,9 @@ $data = (session('order') !== null)? session('order') : [];
 							<div class="col-lg-4 col-md-7 col-12">
 								<div class="right">
 									<ul>
-										<li class="order_subtotal" data-price="">Shipping Cost :<span>{{ $totalDeliveryCost }} AED</span></li>
-                                        <li class="order_subtotal" data-price="">Vat :<span> {{ $totalVatCost }} AED</span></li>
-										<li class="last" id="order_total_price"><strong>Sub Total :<span>{{ $totalCartPrice + $totalDeliveryCost + $totalVatCost }} AED</span></strong></li>
+										<li class="order_subtotal" data-price="">Shipping Cost :<span>{{ $totalDeliveryCost }} INR</span></li>
+                                        <li class="order_subtotal" data-price="">Vat :<span> {{ $totalVatCost }} INR</span></li>
+										<li class="last" id="order_total_price"><strong>Sub Total :<span>{{ $totalCartPrice + $totalDeliveryCost + $totalVatCost }} INR</span></strong></li>
 									</ul>
 								</div>
 							</div>
