@@ -914,5 +914,21 @@
 
 
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const paymentSelect = document.getElementById("payment_method");
+    const orderForm = document.getElementById("order-form");
+    const errorMsg = document.querySelector(".error-msg");
+
+    orderForm.addEventListener("submit", function(e) {
+        if(paymentSelect.value === "online") {
+            e.preventDefault(); // stop form submission
+            errorMsg.textContent = "Online payment is coming soon! Please choose COD.";
+        } else {
+            errorMsg.textContent = ""; // clear error if COD is selected
+        }
+    });
+});
+</script>
 
 @endpush
