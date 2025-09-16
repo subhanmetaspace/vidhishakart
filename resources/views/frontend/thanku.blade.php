@@ -121,7 +121,7 @@ $data = (session('order') !== null)? session('order') : [];
 					</div>
 
 					<!--/ End Total Amount -->
-                    <span class="bg-success d-block text-white text-center p-2 m-2"> Your product order has been placed. Thank you for shopping with us, We will contact you shortly</span>
+                    <span class="bg-success d-block text-white text-center p-2 m-2"> Your product order has been placed. Thank you for shopping with us.</span>
 				</div>
 			</div>
 		</div>
