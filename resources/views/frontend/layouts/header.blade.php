@@ -16,34 +16,10 @@
         justify-content: space-between !important;
         }
     }
-    .middle_innertop{
-        display: flex !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        }
-    .cart-icon {
-    position: relative;
-}
-.search-bar-top{
-   flex: 1;
-    max-width: 800px;
-    min-width: 250px;
-}
-.cart-icon .badge {
-    position: absolute;
-     top: -5px;   /* moves it up */
-    right: -8px;
-    background: red;
-    color: white;
-    font-size: 12px;
-    padding: 2px 6px;
-    border-radius: 50%;
-}
-
 </style>
 <header class="header shop">
     <!-- Topbar -->
-   {{--<div class="topbar">
+   <div class="topbar">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-12 col-12">
@@ -52,10 +28,9 @@
                         <ul class="list-main">
                             @php
                                 $settings=DB::table('settings')->get();
-
                             @endphp
-                            <li><i class="ti-headphone-alt"></i>@foreach($settings as $data) {{$data->phone}} @endforeach</li>
-                            <li><i class="ti-email"></i> @foreach($settings as $data) {{$data->email}} @endforeach</li>
+                            {{-- <li><i class="ti-headphone-alt"></i>@foreach($settings as $data) {{$data->phone}} @endforeach</li>
+                            <li><i class="ti-email"></i> @foreach($settings as $data) {{$data->email}} @endforeach</li> --}}
                         </ul>
                     </div>
                 </div>
@@ -63,13 +38,13 @@
                     <!-- Top Right -->
                     <div class="right-content">
                         <ul class="list-main">
-                             <li><i class="ti-alarm-clock"></i> <a href="#">Daily deal</a></li> 
+                             {{-- <li><i class="ti-alarm-clock"></i> <a href="#">Daily deal</a></li>  --}}
                             @auth
                                  @if(Auth::user()->role=='admin')
-                                <li><i class="fa fa-truck"></i> <a href="{{route('order.track')}}">Track Order</a></li>
+                                {{-- <li><i class="fa fa-truck"></i> <a href="{{route('order.track')}}">Track Order</a></li> --}}
                                 <li><i class="ti-user"></i> <a href="{{route('admin')}}"  target="_blank">Dashboard</a></li>
                                 @else
-                                <li><i class="fa fa-truck"></i> <a href="{{route('order.track')}}">Track Order</a></li>
+                                {{-- <li><i class="fa fa-truck"></i> <a href="{{route('order.track')}}">Track Order</a></li> --}}
                                 <li><i class="ti-user"></i> <a href="{{route('user')}}"  target="_blank">Dashboard</a></li>
                                 @endif 
                                  <li><i class="ti-power-off"></i> <a href="{{route('user.logout')}}">Logout</a></li> 
@@ -83,7 +58,7 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
     <!-- End Topbar -->
     <div class="middle-inner">
         <div class="container">
@@ -94,7 +69,7 @@
                         @php
                             $settings=DB::table('settings')->get();
                         @endphp
-                        <a href="{{route('home')}}"><img style="width:100px" src="@foreach($settings as $data) {{$data->logo}} @endforeach" alt="logo"></a>
+                        <a href="{{route('home')}}"><img style="width:100px" src="https://www.vidhishakart.com/public/photos/1/vidhishalogo1.png{{-- $data) {{$data->logo}} @endforeach--}}" alt="logo"></a>
                     </div>
                     <!--/ End Logo -->
                     <!-- Search Form -->
@@ -112,14 +87,14 @@
                     <!--/ End Search Form -->
                     <div class="mobile-nav"></div>
                 </div>
-                <div class="col-lg-10 col-md-10 col-12  d-flex justify-content-between align-items-center">
+                <div class="col-lg-8 col-md-8 col-12">
                     <div class="search-bar-top">
                         <div class="search-bar w-100">
                             <select>
                                 <option >All Category</option>
-                                {{-- @foreach(Helper::getAllCategory() as $cat)
+                                @foreach(Helper::getAllCategory() as $cat)
                                     <option>{{$cat->title}}</option>
-                                @endforeach --}}
+                                @endforeach
                             </select>
                             <form method="POST" action="{{route('product.search')}}" class="w-80">
                                 @csrf
@@ -128,14 +103,8 @@
                             </form>
                         </div>
                     </div>
-                    <div class="cart-icon ml-3">
-                        <a href="{{ route('cart') }}">
-                            <i class="ti-bag" style="font-size:24px;"></i>
-                            <span class="badge" id="cart-count">0</span>
-                        </a>
-                    </div>
                 </div>
-                {{-- <div class="col-lg-2 col-md-3 col-12">
+                <div class="col-lg-2 col-md-3 col-12">
                     <div class="right-bar">
                         <!-- Search Form -->
                         <div class="sinlge-bar shopping">
@@ -217,7 +186,7 @@
                             <!--/ End Shopping Item -->
                         </div>
                     </div>
-                </div> --}}
+                </div>
             </div>
         </div>
     </div>
@@ -254,19 +223,4 @@
         </div>
     </div>
     <!--/ End Header Inner -->
-    <script>
-document.addEventListener('DOMContentLoaded', function() {
-    function updateCartCount() {
-        let cart = JSON.parse(localStorage.getItem('checkout_cart')) || [];
-        document.getElementById('cart-count').innerText = cart.length;
-    }
-
-    // Update count on page load
-    updateCartCount();
-
-    // Optional: update count if localStorage changes in another tab
-    window.addEventListener('storage', updateCartCount);
-});
-</script>
 </header>
-
