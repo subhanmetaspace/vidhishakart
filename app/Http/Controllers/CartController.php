@@ -23,6 +23,7 @@ class CartController extends Controller
         }        
         $product = Product::where('slug', $request->slug)->first();
         // return $product;
+        // dd($product);
         if (empty($product)) {
             request()->session()->flash('error','Invalid Products');
             return back();
@@ -111,9 +112,11 @@ class CartController extends Controller
         return back();       
     }     
 
-    public function cartUpdate(Request $request){
+    public function cartUpdate(Request $request)
+    {
         // dd($request->all());
-        if($request->quant){
+        if($request->quant)
+        {
             $error = array();
             $success = '';
             // return $request->quant;
@@ -122,7 +125,7 @@ class CartController extends Controller
                 $id = $request->qty_id[$k];
                 // return $id;
                 $cart = Cart::find($id);
-                // return $cart;
+                //  dd($cart->product->stock);
                 if($quant > 0 && $cart) {
                     // return $quant;
 
@@ -131,12 +134,14 @@ class CartController extends Controller
                         return back();
                     }
                     $cart->quantity = ($cart->product->stock > $quant) ? $quant  : $cart->product->stock;
-                    // return $cart;
                     
                     if ($cart->product->stock <=0) continue;
-                    $after_price=($cart->product->price-($cart->product->price*$cart->product->discount)/100);
+                    // dd( $cart->quantity);
+
+                    $after_price=($cart->product->price - ($cart->product->price * $cart->product->discount)/100);
                     $cart->amount = $after_price * $quant;
-                    // return $cart->price;
+                    //  dd( $cart );
+
                     $cart->save();
                     $success = 'Cart updated successfully!';
                 }else{

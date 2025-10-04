@@ -86,8 +86,8 @@ class FrontendController extends Controller
         
         if(!empty($product_detail))
         $product_detail->images =  DB::table('product_images')->where('product_id', $product_detail->id)->get();
-      //  return view('frontend.pages.product_detail')->with('product_detail',$product_detail);
-        return view('frontend.pages.product_detail_new')->with('product_detail',$product_detail)->with('predata', $cahecData);
+       return view('frontend.pages.product_detail')->with('product_detail',$product_detail);
+        // return view('frontend.pages.product_detail_new')->with('product_detail',$product_detail)->with('predata', $cahecData);
     }
 
     public function productGrids()
